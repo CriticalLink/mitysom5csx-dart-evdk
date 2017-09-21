@@ -1,0 +1,11 @@
+This is based off the original BCON demo_app (from 
+ git://support.criticallink.com/home/git/mitysom-5cs/mitysom_5csx_dev_board.git
+ branch bcon_adaptor). The application has been converted to boot with autotools
+ and is being modified to fit the structure we desire for the VDK
+
+The following steps will allow you to cross-compile for the 5csx
+
+autoreconf --install
+./configure --host arm-poky-linux-gnueabi
+make
+
