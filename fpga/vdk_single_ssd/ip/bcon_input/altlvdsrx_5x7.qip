@@ -1,0 +1,8 @@
+set_global_assignment -name IP_TOOL_NAME "ALTLVDS_RX"
+set_global_assignment -name IP_TOOL_VERSION "13.1"
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "altlvdsrx_5x7.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "altlvdsrx_5x7.bsf"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "altlvdsrx_5x7_inst.vhd"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "altlvdsrx_5x7.inc"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "altlvdsrx_5x7.cmp"]
+set_global_assignment -name MISC_FILE [file join $::quartus(qip_path) "altlvdsrx_5x7.ppf"]
