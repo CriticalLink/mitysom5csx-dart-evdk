@@ -23,6 +23,5 @@ full image:
 
 The yocto layer is still a work in progress as it is being mitgrated form an
 internal server. If you are trying to generate a full yocto image and run
-into problems, you can post an issue here or on the [Critical Link Forms Page]
-(https://support.criticallink.com/redmine/projects/5csx_vdk_basler/boards) for this project.
+into problems, you can post an issue here or on the [Critical Link Forms Page](https://support.criticallink.com/redmine/projects/5csx_vdk_basler/boards) for this project.
 
