@@ -1,0 +1,29 @@
+autoload=no
+bootdelay=5
+baudrate=115200
+bootargs=console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootwait
+bootcmd=run mmcload; run mmcboot
+verify=n
+preboot=run initphy;run setup_usb;run setup_usb_hub
+initphy=gpio c 28; gpio s 28; sleep 1
+setup_usb=gpio set 0; gpio clear 9; gpio set 9
+setup_usb_hub=gpio clear 37; gpio set 37 
+loadfdtaddr=0x00000100
+loadkerneladdr=0x7fc0
+loadinitramfsaddr=0x3000000
+loadfpgaaddr=0x2000000
+loadfpgasize=0x700000
+fpgaload=run bridge_disable;fpga load 0 ${loadfpgaaddr} ${loadfpgasize}; run bridge_enable_handoff
+fpga=0
+mmcboot=run mmcsetbootargs;run fpgaload;bootm ${loadkerneladdr} - ${loadfdtaddr}
+mmcsetbootargs=setenv bootargs console=ttyS0,115200 root=${mmcroot} rw rootwait mem=512M
+mmcload=mmc rescan;run mmcloadkernel;run mmcloadfdt;run mmcloadfpga
+mmcloadkernel=${mmcloadcmd} mmc 0:${mmcloadpart} ${loadkerneladdr} ${mmckernelloc}
+mmcloadfdt=${mmcloadcmd} mmc 0:${mmcloadpart} ${loadfdtaddr} ${mmcfdtloc}
+mmcloadfpga=${mmcloadcmd} mmc 0:${mmcloadpart} ${loadfpgaaddr} ${mmcfpgaloc}
+mmcloadcmd=ext2load
+mmcloadpart=2
+mmcroot=/dev/mmcblk0p2
+mmcfdtloc=/boot/socfpga_mitysom5csx_vdk.dtb
+mmckernelloc=/boot/uImage
+mmcfpgaloc=/boot/vdk_dual.rbf

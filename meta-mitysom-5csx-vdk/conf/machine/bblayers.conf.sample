@@ -1,0 +1,18 @@
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "1"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  ${TOPDIR}/../meta \
+  ${TOPDIR}/../meta-poky \
+  ${TOPDIR}/../meta-yocto-bsp \
+  ${TOPDIR}/../meta-openembedded/meta-oe \
+  ${TOPDIR}/../meta-mitysom-5csx \
+  ${TOPDIR}/../openembedded-core/meta \
+  ${TOPDIR}/../meta-ti \
+  ${TOPDIR}/../meta-mitysom-5csx-vdk \
+  ${TOPDIR}/../meta-criticallink-internal \
+  "

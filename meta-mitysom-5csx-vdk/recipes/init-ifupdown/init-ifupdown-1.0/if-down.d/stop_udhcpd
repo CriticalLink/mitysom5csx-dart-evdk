@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ $IFACE = usb0 ] && [ $MODE = stop ]
+then
+	pkill udhcpd
+fi
+exit 0
