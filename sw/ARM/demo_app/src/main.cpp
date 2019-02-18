@@ -61,8 +61,8 @@ static const uint32_t OUTPUT_V_RES = 720; //!< Vertical resolution for output
 static const uint32_t OUTPUT_H_RES = 1280; //!< Horizontal resolution for output
 	//!< source (i.e. HDMI monitor).
 
-const string SINGLE_CAM_MODEL_NAME("daA2500-14bc");
-const string DUAL_CAM_MODEL_NAME("daA1280-54bm");
+const string SINGLE_CAM_MODEL_NAMES[] = {"daA2500-14bc"};
+const string DUAL_CAM_MODEL_NAMES[] = {"daA1280-54bm", "daA1280-54lm"};
 
 //TODO: make this a better utility function? Rename to dumpInputFrame?
 void dumpFrame(int BytesPerPixel)
@@ -379,15 +379,33 @@ int main(int argc, char* argv[])
 				num_cams << " is: " << model_name << endl;
 			cout << "Device Factory for Camera " << cnt+1 << " of " << 
 				num_cams << " is: " << dev_factory << endl;
-			if (1 == num_cams && SINGLE_CAM_MODEL_NAME != model_name)
+			if (1 == num_cams)
 			{
-				cout << "In correct Model Name for Single Camera Configuration. Exiting." << endl;
-				return EXIT_FAILURE;
+				// Go through the list of supported single cameras
+				bool foundModel = false;
+				for (int i = 0; i < sizeof(SINGLE_CAM_MODEL_NAMES); i++)
+				{
+					foundModel |= model_name == SINGLE_CAM_MODEL_NAMES[i];
+				}
+				if (!foundModel)
+				{
+					cout << "In correct Model Name for Single Camera Configuration. Exiting." << endl;
+					return EXIT_FAILURE;
+				}
 			}
-			else if (2 == num_cams && DUAL_CAM_MODEL_NAME != model_name)
+			else if (2 == num_cams)
 			{
-				cout << "In correct Model Name for Dual Camera Configuration. Exiting." << endl;
-				return EXIT_FAILURE;
+				// Go through the list of supported dual cameras
+				bool foundModel = false;
+				for (int i = 0; i < sizeof(DUAL_CAM_MODEL_NAMES); i++)
+				{
+					foundModel |= model_name == DUAL_CAM_MODEL_NAMES[i];
+				}
+				if (!foundModel)
+				{
+					cout << "In correct Model Name for Dual Camera Configuration. Exiting." << endl;
+					return EXIT_FAILURE;
+				}
 			}
 			// TODO this is a work-around for dual camera examples.  Currently there is no obvious way to 
 			// determine which enumerated BCON stream / camera is which.  For whatever reason, the 
